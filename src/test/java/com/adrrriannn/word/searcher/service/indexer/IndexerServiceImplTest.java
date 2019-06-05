@@ -1,5 +1,6 @@
 package com.adrrriannn.word.searcher.service.indexer;
 
+import com.adrrriannn.word.searcher.exception.InvalidDirectoryException;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -42,5 +43,10 @@ public class IndexerServiceImplTest {
 
         Set<String> file3Content = result.get(FILENAME_3);
         assertEquals(INDEXED_FILES.get(FILENAME_3), file3Content);
+    }
+
+    @Test(expected = InvalidDirectoryException.class)
+    public void indexDirectoryInvalidDirectoryPath() {
+        indexerService.indexDirectory(null);
     }
 }

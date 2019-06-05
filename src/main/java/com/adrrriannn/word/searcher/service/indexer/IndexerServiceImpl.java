@@ -1,5 +1,9 @@
 package com.adrrriannn.word.searcher.service.indexer;
 
+import com.adrrriannn.word.searcher.exception.DirectoryIndexingException;
+import com.adrrriannn.word.searcher.exception.FileContentReadingException;
+import com.adrrriannn.word.searcher.exception.InvalidDirectoryException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,14 +15,25 @@ import java.util.stream.Stream;
 
 public class IndexerServiceImpl implements IndexerService {
     @Override
-    public Map<String, Set<String>> indexDirectory(String directoryPath) throws IOException {
+    public Map<String, Set<String>> indexDirectory(String directoryPath) {
+
+        if(directoryPath == null || directoryPath.isEmpty()) {
+            throw new InvalidDirectoryException(directoryPath);
+        }
+
         try (Stream<Path> paths = Files.walk(Paths.get(directoryPath))) {
-            return paths
+            Map<String, Set<String>> result = paths
                 .filter(Files::isRegularFile)
-                .collect(Collectors.toMap(
+                .collect(
+                    Collectors.toMap(
                         path -> path.toFile().getName(),
                         this::getFileWords
-                ));
+                    )
+                );
+
+            return Collections.unmodifiableMap(result);
+        } catch (IOException ex) {
+            throw new DirectoryIndexingException(directoryPath);
         }
     }
 
@@ -34,7 +49,7 @@ public class IndexerServiceImpl implements IndexerService {
             }
 
         } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
+            throw new FileContentReadingException(path.toFile().getName());
         }
 
         return fileWords;

@@ -1,7 +1,5 @@
 package com.adrrriannn.word.searcher.service.searcher;
 
-import com.adrrriannn.word.searcher.model.SearchResult;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,19 +11,22 @@ public class WordSearcherServiceImpl implements WordSearcherService {
         int wordsSize = words.size();
 
         return source.entrySet().parallelStream()
-                .map(entry -> {
-                    int foundWords = 0;
-                    Set<String> sourceContent = entry.getValue();
-                    for(String word : words) {
-                        if(sourceContent.contains(word)) {
-                            foundWords++;
-                        }
-                    }
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> {
+                            int foundWords = 0;
+                            Set<String> sourceContent = entry.getValue();
+                            for(String word : words) {
+                                if(sourceContent.contains(word)) {
+                                    foundWords++;
+                                }
+                            }
 
-                    Double foundWordsPercentage =  (((double)foundWords / wordsSize) * 100.0);
-                    return new SearchResult(entry.getKey(), foundWordsPercentage);
-                })
-                .collect(Collectors.toMap(SearchResult::getFilename, SearchResult::getFoundWordsPercentage));
+                            return (((double)foundWords / wordsSize) * 100.0);
+                        }
+                    )
+                );
     }
 
 

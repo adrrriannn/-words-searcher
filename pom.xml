@@ -7,6 +7,27 @@
     <groupId>com.adrrriannn</groupId>
     <artifactId>word-searcher</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <junit.version>4.12</junit.version>
+        <mockito.version>2.28.2</mockito.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -32,14 +53,5 @@
         </plugins>
 
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
 </project>
