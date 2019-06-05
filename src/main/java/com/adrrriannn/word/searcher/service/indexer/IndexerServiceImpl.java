@@ -44,6 +44,7 @@ public class IndexerServiceImpl implements IndexerService {
 
             String line;
             while ((line = br.readLine()) != null) {
+                line = line.replaceAll("[\\-\\+\\.\\^:,]","");
                 String[] words = line.split(" ");
                 fileWords.addAll(Arrays.asList(words));
             }
