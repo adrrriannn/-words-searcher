@@ -1,6 +1,5 @@
-package service.searcher;
+package com.adrrriannn.word.searcher.service.searcher;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;

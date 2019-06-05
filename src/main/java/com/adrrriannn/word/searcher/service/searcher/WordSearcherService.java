@@ -1,4 +1,4 @@
-package service.searcher;
+package com.adrrriannn.word.searcher.service.searcher;
 
 import java.util.List;
 import java.util.Map;

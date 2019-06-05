@@ -1,7 +1,8 @@
-package service.indexer;
+package com.adrrriannn.word.searcher.service.indexer;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,11 +14,11 @@ import static org.junit.Assert.assertNotNull;
 
 public class IndexerServiceImplTest {
 
-    private static final String DIRECTORY_PATH = "";
+    private static final String DIRECTORY_PATH = "src/test/resources/example";
 
-    private static final String FILENAME_1 = "FILE_1";
-    private static final String FILENAME_2 = "FILE_2";
-    private static final String FILENAME_3 = "FILE_3";
+    private static final String FILENAME_1 = "file_1";
+    private static final String FILENAME_2 = "file_2";
+    private static final String FILENAME_3 = "file_3";
 
     private static final Map<String, Set<String>> INDEXED_FILES = new HashMap<>();
     static {
@@ -29,7 +30,7 @@ public class IndexerServiceImplTest {
     private static final IndexerService indexerService = new IndexerServiceImpl();
 
     @Test
-    public void indexDirectory() {
+    public void indexDirectory() throws IOException {
         Map<String, Set<String>> result = indexerService.indexDirectory(DIRECTORY_PATH);
         assertNotNull(result);
 
