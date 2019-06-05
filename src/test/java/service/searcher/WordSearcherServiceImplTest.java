@@ -16,7 +16,7 @@ public class WordSearcherServiceImplTest {
     private static final String FILENAME_2 = "FILE_2";
     private static final String FILENAME_3 = "FILE_3";
 
-    private static final Map<String, Set<String>> INDEXED_FILES = new HashMap<String, Set<String>>();
+    private static final Map<String, Set<String>> INDEXED_FILES = new HashMap<>();
     static {
         INDEXED_FILES.put(FILENAME_1, Stream.of("Hello", "world", "I'm", "here").collect(Collectors.toSet()));
         INDEXED_FILES.put(FILENAME_2, Stream.of("Wonderful", "world").collect(Collectors.toSet()));
@@ -49,7 +49,7 @@ public class WordSearcherServiceImplTest {
     public void searchWordsNotFound() {
         List<String> wordsTarget = Arrays.asList("awesome", "search");
 
-        Map<String, Double> results = parallelWordSearcherService.search(INDEXED_FILES, wordsTarget);
+        Map<String, Double> results = wordSearcherService.search(INDEXED_FILES, wordsTarget);
 
         Double file1Result = results.get(FILENAME_1);
         assertNotNull(file1Result);
