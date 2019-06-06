@@ -57,7 +57,9 @@ public class ApplicationLauncher {
 
             Map<String, Double> result = wordSearcherService.search(indexedFiles, keyboardInputAsWords, searchMode);
 
-            result.forEach((filename, percentage) -> printStream.println(String.format(Constants.FILE_SCORE_MESSAGE, filename, percentage)));
+            result.entrySet().stream()
+                .filter(entry -> entry.getValue() > 0)
+                .forEach(entry -> printStream.println(String.format(Constants.FILE_SCORE_MESSAGE, entry.getKey(), entry.getValue())));
         }
     }
 
