@@ -35,7 +35,7 @@ public class ApplicationLauncherTest {
     static {
         SEARCH_RESULTS.put(FILENAME_1, 25.0);
         SEARCH_RESULTS.put(FILENAME_2, 50.0);
-        SEARCH_RESULTS.put(FILENAME_3, 100.0);
+        SEARCH_RESULTS.put(FILENAME_3, 0.0);
     }
 
     @Mock
@@ -69,7 +69,8 @@ public class ApplicationLauncherTest {
         verify(indexerService).indexDirectory(any());
         verify(wordSearcherService).search(any(), any(), any());
         SEARCH_RESULTS.entrySet().stream()
-                .peek(entry -> verify(printStream).println(entry.getKey() + " " + entry.getValue() + "%"));
+                .filter(entry -> entry.getValue() > 0)
+                .forEach(entry -> verify(printStream).println(entry.getKey() + " " + String.format("%.2f", entry.getValue()) + "%"));
     }
 
 
