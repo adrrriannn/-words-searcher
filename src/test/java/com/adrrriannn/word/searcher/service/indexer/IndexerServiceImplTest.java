@@ -3,7 +3,6 @@ package com.adrrriannn.word.searcher.service.indexer;
 import com.adrrriannn.word.searcher.exception.InvalidDirectoryException;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +30,7 @@ public class IndexerServiceImplTest {
     private static final IndexerService indexerService = new IndexerServiceImpl();
 
     @Test
-    public void indexDirectory() throws IOException {
+    public void indexDirectory() {
         Map<String, Set<String>> result = indexerService.indexDirectory(DIRECTORY_PATH);
         assertNotNull(result);
 

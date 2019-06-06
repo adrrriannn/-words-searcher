@@ -53,7 +53,7 @@ public class ApplicationLauncherTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         doReturn(INDEXED_FILES).when(indexerService).indexDirectory(any());
-        doReturn(SEARCH_RESULTS).when(wordSearcherService).search(any(), any());
+        doReturn(SEARCH_RESULTS).when(wordSearcherService).search(any(), any(), any());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ApplicationLauncherTest {
         verify(printStream).println(INDEXED_FILES.size() + " files read in directory " + args[0]);
         verify(printStream, times(2)).print(Constants.SEARCH_LABEL);
         verify(indexerService).indexDirectory(any());
-        verify(wordSearcherService).search(any(), any());
+        verify(wordSearcherService).search(any(), any(), any());
         SEARCH_RESULTS.entrySet().stream()
                 .peek(entry -> verify(printStream).println(entry.getKey() + " " + entry.getValue() + "%"));
     }
@@ -84,7 +84,7 @@ public class ApplicationLauncherTest {
         verify(printStream).println(INDEXED_FILES.size() + " files read in directory " + args[0]);
         verify(printStream, times(1)).print(Constants.SEARCH_LABEL);
         verify(indexerService).indexDirectory(any());
-        verify(wordSearcherService, never()).search(any(), any());
+        verify(wordSearcherService, never()).search(any(), any(), any());
     }
 
     @Test(expected = IllegalArgumentException.class)
