@@ -27,28 +27,31 @@ public class ApplicationLauncher {
 
     public void launch(String[] args) {
 
-        if (args.length == 0) {
-            throw new IllegalArgumentException("No directory given to index");
+        if(args.length == 0) {
+            throw new IllegalArgumentException("No directory give to index");
         }
-        String indexableDirectory​ = args[0];
+
+        String indexableDirectory = args[0];
         if(args.length > 1) {
             SearchMode searchMode = SearchMode.fromString(args[1]);
             SearchConfiguration.setSearchMode(searchMode);
         }
 
-        final Map<String, Set<String>> indexedFiles = indexerService.indexDirectory(indexableDirectory​);
+        final Map<String, Set<String>> indexedFiles = indexerService.indexDirectory(indexableDirectory);
 
-        printStream.println(String.format(Constants.FILES_READ_MESSAGE, indexedFiles.size(), indexableDirectory​));
-        Scanner keyboard​ = new Scanner(inputStream);
+        printStream.println(String.format(Constants.FILES_READ_MESSAGE, indexedFiles.size(), indexableDirectory));
 
-        while (true) {
+        Scanner keyboard = new Scanner(inputStream);
+
+        while(true) {
             printStream.print(Constants.SEARCH_LABEL);
-            final String input = keyboard​.nextLine();
+            final String input = keyboard.nextLine();
 
             ApplicationCommand applicationCommand = ApplicationCommand.fromInstruction(input);
             if(ApplicationCommand.QUIT.equals(applicationCommand)) {
                 break;
             }
+
             List<String> keyboardInputAsWords = Arrays.asList(input.split(" "));
             SearchMode searchMode = SearchConfiguration.getSearchMode();
 
