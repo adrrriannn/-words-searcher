@@ -25,8 +25,7 @@ Once the Jar file is built, the next command with one or two(optional) parameter
   - **CASE_SENSITIVE**. Which performs a case sensitive search and whose complexity is O(n).
   - **CASE_INSENSITIVE**. Which performs a case insensitive search whose complexity is O(n^2) in the worst case. This could be improved though by using a binary search, by initially sorting the indexed list of words. This would improve the complexity to O(log n).
   
-Note: In order to make performance better parallel streams have been used to index and search concurrently. This leverages Java 8 concurrent new features. Alternatively, threading may be implemented explicitly, which would be absolutely fine. fo
-Once the application is started, next step is make a call to the endpoint that process the hoover transition. An example of concurrent processing using threads, thread pools, latches and concurrent collections can be found in this repository: [text-analyser](https://github.com/adrrriannn/text-analyser)
+Note: In order to make performance better parallel streams have been used to index and search concurrently. This leverages Java 8 concurrent new features. Alternatively, threading may be implemented explicitly, which would be absolutely fine. An example of concurrent processing using threads, thread pools, latches and concurrent collections can be found in this repository: [text-analyser](https://github.com/adrrriannn/text-analyser)
 
 Example of usage:
 
